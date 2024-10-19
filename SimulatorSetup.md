@@ -1,4 +1,4 @@
-# FSAI Simulator Setup
+2# FSAI Simulator Setup
 
 ## Computer Specs Required
 - 8 core 2.3Ghz CPU
@@ -233,9 +233,16 @@
     }
     }
     ```
-2. Close all Ubuntu terminals
-3. Launch `FSDS.exe`, then run with spectator server
-5. Open `1st Ubuntu terminal`, to ROS and launch ROS Bridge 
+2. In order to change the settings.json in the cloned repo, navigate to the correct directory and open nano
+   ```
+   cd Formula-Student-Driverless-Simulator
+   ```
+   ```
+   nano settings.json
+   ```
+4. Close all Ubuntu terminals
+5. Launch `FSDS.exe`, then run with spectator server
+6. Open `1st Ubuntu terminal`, to ROS and launch ROS Bridge 
     ```
     cd Formula-Student-Driverless-Simulator/ros
     ```
@@ -245,14 +252,14 @@
     ```
     roslaunch fsds_ros_bridge fsds_ros_bridge.launch
     ```
-6. Open `2nd Ubuntu terminal`, to python code and run script
+7. Open `2nd Ubuntu terminal`, to python code and run script
     ```
     cd Formula-Student-Driverless-Simulator/python/examples
     ```
     ```
     python3 autonomous_example.py
     ```
-7. Check if the model car is moving in the FSDS.exe
+8. Check if the model car is moving in the FSDS.exe
 
 ## Success!
 1. Congrats! You’ve now done what has taken us FOREVER to sort out in a lot less time (I spent 4 hours in the CS lab on one error).
@@ -260,3 +267,64 @@
 2. If there are any errors or improvements for this setup guide, please let us know or put in a pull request for amends.
 
 3. Great success! Now go test your own scripts on the simulator you just set up!
+
+## Time Savers
+### Adding settings.json to bash to make it easier to access
+
+1. Open the text editor
+   ```
+   nano ~/.bashrc
+   ```
+2. Add an alias at the end of the file (call it whatever you want I've just called it editsettings)
+    ```
+    alias editsettings='cd ~ && cd Formula-Student-Driverless-Simulator && nano settings.json'
+    ```
+3. Run this command to save it
+   ```
+   source ~/.bashrc
+   ```
+4. Now whenever you want to edit he settings.json file you can just run:
+   ```
+   editsettings
+   ```
+
+### Adding the Formula-Student-Driverless-Simulator directory to bash to make it quicker to access
+
+1. Open the text editor
+   ```
+   nano ~/.bashrc
+   ```
+2. Add an alias at the end of the file (call it whatever you want I've just called it fs)
+    ```
+    alias fs='cd Formula-Student-Driverless-Simulator'
+    ```
+3. Run this command to save it
+   ```
+   source ~/.bashrc
+   ```
+4. Now whenever you want to get to that directory you can just run:
+   ```
+   fs
+   ```
+### Finally you can do this for running the ROS Bridge (biggest time saver here)
+
+1. Open the text editor
+   ```
+   nano ~/.bashrc
+   ```
+2. Add the following lines to create a function (call it whatever you want (are you seeing the pattern))
+    ```
+    runrosbridge() { 
+    cd ~/Formula-Student-Driverless-Simulator/ros 
+    source devel/setup.bash 
+    roslaunch fsds_ros_bridge fsds_ros_bridge.launch
+    }
+    ```
+3. Run this command to save it
+   ```
+   source ~/.bashrc
+   ```
+4. Now whenever you want to get to load the ROS Bridge yuo just run:
+   ```
+   runrosbridge
+   ```
